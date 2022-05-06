@@ -9,7 +9,7 @@ namespace KeyListener
         static float Delay = 1000;
         static System.Timers.Timer Timer = new System.Timers.Timer();
         static ConsoleKey lastKeyPressed;
-        static TPiece piece = new TPiece();
+        static T_Piece piece = new T_Piece();
 
         static void Main()
         {
@@ -38,11 +38,11 @@ namespace KeyListener
             {
                 case ConsoleKey.LeftArrow:
                     piece.Rotate(false);
-                    piece.DrawPiece();
+                    piece.DrawPiece(2, 2);
                     break;
                 case ConsoleKey.RightArrow:
                     piece.Rotate(true);
-                    piece.DrawPiece();
+                    piece.DrawPiece(2, 2);
                     break;
                 case ConsoleKey.UpArrow:
                 case ConsoleKey.DownArrow:
