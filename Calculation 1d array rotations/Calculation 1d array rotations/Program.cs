@@ -12,6 +12,7 @@ namespace Program
         //Work for ANY WIDTH!
 
         public int Turns = 1;
+        public bool IsRight = true;
 
         public int[] Matrix = new int[(Width*Width)];
         //Obviously it's not a Matrix, just a name to make sense
@@ -30,6 +31,8 @@ namespace Program
                 Matrix[i] = i+1;
             }
             Show();
+            //IsRight means it will go right, do IsRight = false for left
+            IsRight = true;
             //Turns as many times as Turns is
             for (int i = 0; i < Turns; i++)
             {
@@ -43,9 +46,10 @@ namespace Program
             //THIS GOES TO THE LEFT!
             int[] Temp = new int[(Width*Width)];
             //Move the current Matrix places to the new places in a Temp Array
-            for (int i = 0; i < (Width*Width); i++)
+            for (int i = 0; i < (Width * Width); i++)
             {
-                Temp[i] = Matrix[i + ((-1 + Width) + (((-Width - 1) * (i / Width)) + ((Width - 1) * (i % Width))))];
+                //Does a Chcek and uses the equation, based on wether it is right or left, based on a boolean
+                Temp[i] = IsRight ? Matrix[i + (((Width * Width) - Width) + (((-Width + 1) * (i / Width)) + ((-Width - 1) * (i % Width))))] : Matrix[i +((-1 + Width) + (((-Width - 1) * (i / Width)) + ((Width - 1) * (i % Width))))];
             }
             //Unless there is a better way, set the values of Matrix to the new rotated values of Temp
             for (int i = 0; i < (Width * Width); i++)
