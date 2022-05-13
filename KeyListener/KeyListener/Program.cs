@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Timers;
+using System.Text;
 using static System.Console;
 
 namespace KeyListener
@@ -20,7 +21,9 @@ namespace KeyListener
         public void Start()
         {
             Clear();
-            piece.Reset();
+            CursorVisible = false;
+            OutputEncoding = Encoding.Unicode;
+
             WriteLine("Please press an arrow key...");
 
             Timer.Elapsed += Tick;

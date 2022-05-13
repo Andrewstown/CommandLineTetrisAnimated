@@ -8,10 +8,8 @@ namespace KeyListener
 {
     public abstract class Tetrimino
     {
-        public char[] Body;
-        public static int Width;
-
-        public abstract void Reset();
+        protected abstract char[] Body { get; set; }
+        public static int Width = 3;
 
         public abstract void Rotate(bool IsRight);
 

@@ -5,30 +5,32 @@ namespace KeyListener
 {
     public class T_Piece : Tetrimino
     {
-        public T_Piece()
-        {
-            char[] Body = new char[] { ' ', '▉', ' ', '▉', '▉', '▉', ' ', ' ', ' ' };
-            // I = { ' ', ' ', ' ', ' ', '▉', '▉', '▉', '▉', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' }
-            // J = { '▉', ' ', ' ', '▉', '▉', '▉', ' ', ' ', ' ' }
-            // L = { ' ', ' ', '▉', '▉', '▉', '▉', ' ', ' ', ' ' }
-            // O = { '▉', '▉', '▉', '▉' }
-            // Z = { '▉', '▉', ' ', ' ', '▉', '▉', ' ', ' ', ' ' }
-            // S = { ' ', '▉', '▉', '▉', '▉', ' ', ' ', ' ', ' ' }
-            int Width = 3;
-        }
-        
-        public override void Reset()
-        {
-            Body = new char[] { ' ', '▉', ' ', '▉', '▉', '▉', ' ', ' ', ' ' };
-        }
+        //protected override char[] Body { get; set; } = new char[] { ' ', '▉', ' ', '▉', '▉', '▉', ' ', ' ', ' ' };
+        protected override char[] Body { get; set; } = new char[] { ' ', ' ', ' ', ' ', '▉', '▉', '▉', '▉', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' };
+        // protected override char[] Body => new char[] { '▉', ' ', ' ', '▉', '▉', '▉', ' ', ' ', ' ' };
+        // protected override char[] Body { get; set; } = new char[] { ' ', ' ', '▉', '▉', '▉', '▉', ' ', ' ', ' ' };
+        // protected override char[] Body { get; set; } = new char[] { '▉', '▉', '▉', '▉' };
+        // protected override char[] Body { get; set; } = new char[] { '▉', '▉', ' ', ' ', '▉', '▉', ' ', ' ', ' ' };
+        // protected override char[] Body { get; set; } = new char[] { ' ', '▉', '▉', '▉', '▉', ' ', ' ', ' ', ' ' };
 
+    
         public override void Rotate(bool IsRight)
         {
             char[] Temp = new char[(Width * Width)];
             for (int i = 0; i < (Width * Width); i++)
             {
-                Temp[i] = IsRight ? Body[i + (((Width * Width) - Width) + (((-Width + 1) * (i / Width)) + ((-Width - 1) * (i % Width))))] : Body[i + ((-1 + Width) + (((-Width - 1) * (i / Width)) + ((Width - 1) * (i % Width))))];
+                try
+                {
+                    Temp[i] = IsRight ? Body[i + (((Width * Width) - Width) + (((-Width + 1) * (i / Width)) + ((-Width - 1) * (i % Width))))] : Body[i + ((-1 + Width) + (((-Width - 1) * (i / Width)) + ((Width - 1) * (i % Width))))];
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(IsRight);
+                    Console.WriteLine(i);
+                    Console.WriteLine(e.ToString());
+                }
             }
+
             for (int i = 0; i < (Width * Width); i++)
             {
                 Body[i] = Temp[i];
@@ -42,7 +44,7 @@ namespace KeyListener
                 SetCursorPosition(xStart, yStart + y);
                 for (int x = 0; x < Width; x++)
                 {
-                    Console.Write(Body[x+(y*Width)]+""+Body[x + (y * Width)]);
+                    Console.Write(Body[x+(y*Width)]);
                 }
             }
         }
